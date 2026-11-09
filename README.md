@@ -1,69 +1,56 @@
-#  Organizador Inteligente de Archivos
+# 📂 Organizador Inteligente de Archivos
 
-Proyecto desarrollado en Python que permite organizar automáticamente archivos dentro de una carpeta según su tipo de extensión.
+Herramienta en **Python** que ordena automáticamente una carpeta desordenada, moviendo cada archivo a una subcarpeta según su tipo: imágenes, PDFs, documentos, música, videos y más.
 
----
-
-# Funcionalidades
-
-* Organiza imágenes automáticamente
-* Organiza archivos PDF
-* Organiza documentos de texto
-* Organiza música
-* Organiza videos
-* Organiza archivos comprimidos
-* Crea carpetas automáticamente si no existen
-* Envía a "Otros" los archivos de tipos no reconocidos
-* No sobrescribe archivos: si el nombre ya existe, agrega (1), (2)...
-* Modo `--simular` para ver qué se movería sin mover nada
+Se puede usar con una **ventana gráfica** sencilla o desde la **línea de comandos**, y permite **deshacer** la última organización.
 
 ---
 
-# Tecnologías utilizadas
+## Funcionalidades
 
-* Python 3
-* Librerías estándar:
+- **Ventana gráfica (tkinter):** eliges la carpeta, ves la vista previa en una tabla y organizas con un clic.
+- **Vista previa:** muestra qué archivo irá a cada carpeta antes de mover nada.
+- **Deshacer:** devuelve los archivos a su lugar original y borra las carpetas que quedaron vacías.
+- **No sobrescribe archivos:** si el nombre ya existe, agrega (1), (2)...
+- **Carpeta "Otros":** para los tipos de archivo no reconocidos.
+- **Respeta las subcarpetas existentes:** solo mueve archivos sueltos.
+- **Resumen:** al terminar indica cuántos archivos fueron a cada carpeta.
 
-  * os
-  * shutil
-  * argparse
-  * unittest (pruebas)
+| Carpeta | Extensiones |
+|---|---|
+| Imagenes | jpg, jpeg, png, gif, webp, bmp, svg |
+| PDFs | pdf |
+| Documentos | docx, doc, txt, pptx, ppt, xlsx, xls, csv, odt |
+| Videos | mp4, mkv, mov, avi |
+| Musica | mp3, wav, m4a, flac |
+| Archivos ZIP | zip, rar, 7z, tar, gz |
+| Programas | exe, msi |
+| Otros | cualquier otra |
 
----
+## Tecnologías
 
-# Estructura del proyecto
+- Python 3, solo con la librería estándar: `os`, `shutil`, `json`, `argparse`, `tkinter`
+- `unittest` para las pruebas automáticas
 
-```plaintext
-organizador-archivos-python/
-│
-├── main.py
-├── test_main.py
-├── README.md
-│
-└── carpeta_prueba/
-```
-
----
-
-# Cómo ejecutar el proyecto
-
-## 1. Clonar el repositorio
+## Cómo usarlo
 
 ```bash
 git clone https://github.com/evelyn-escobar/organizador-archivos-python.git
-```
-
----
-
-## 2. Entrar a la carpeta del proyecto
-
-```bash
 cd organizador-archivos-python
 ```
 
----
+### Con la ventana gráfica
 
-## 3. Ejecutar el programa
+```bash
+python gui.py
+```
+
+1. Haz clic en **Elegir carpeta...**
+2. Revisa la **vista previa**.
+3. Haz clic en **Organizar** y confirma.
+4. Si te arrepientes, usa **Deshacer**.
+
+### Desde la línea de comandos
 
 ```bash
 # Te pide la ruta de la carpeta
@@ -74,74 +61,44 @@ python main.py carpeta_prueba
 
 # Ver qué se movería, sin mover nada
 python main.py carpeta_prueba --simular
+
+# Devolver los archivos a su lugar
+python main.py carpeta_prueba --deshacer
 ```
 
-## 4. Ejecutar las pruebas
+## Ejemplo
+
+```plaintext
+Antes                     Después
+carpeta_prueba/           carpeta_prueba/
+├── foto.jpg              ├── Imagenes/
+├── tarea.pdf             │   └── foto.jpg
+├── musica.mp3            ├── PDFs/
+└── video.mp4             │   └── tarea.pdf
+                          ├── Musica/
+                          │   └── musica.mp3
+                          └── Videos/
+                              └── video.mp4
+```
+
+## Pruebas
 
 ```bash
 python -m unittest
 ```
 
----
+Las pruebas crean carpetas temporales y verifican la clasificación por extensión, que no se sobrescriban archivos, la vista previa, la organización y el deshacer.
 
-# ¿Cómo funciona?
-
-El programa solicita la ruta de una carpeta y automáticamente:
-
-* detecta los archivos,
-* identifica su extensión,
-* crea carpetas organizadas,
-* y mueve cada archivo a su ubicación correspondiente.
-
----
-
-# Ejemplo de funcionamiento
-
-## Antes
+## Estructura
 
 ```plaintext
-carpeta_prueba/
-foto.jpg
-tarea.pdf
-musica.mp3
-video.mp4
+organizador-archivos-python/
+├── main.py          # Lógica de organización y línea de comandos
+├── gui.py           # Ventana gráfica
+├── test_main.py     # Pruebas automáticas
+└── carpeta_prueba/  # Archivos de ejemplo
 ```
 
----
+## Autora
 
-## Después
-
-```plaintext
-carpeta_prueba/
-│
-├── Imagenes/
-│   └── foto.jpg
-│
-├── PDFs/
-│   └── tarea.pdf
-│
-├── Musica/
-│   └── musica.mp3
-│
-└── Videos/
-    └── video.mp4
-```
-
----
-
-## Objetivo del proyecto
-
-Este proyecto fue desarrollado como práctica de automatización y manejo de archivos en Python, fortaleciendo habilidades de:
-
-* lógica de programación,
-* automatización,
-* manipulación de archivos,
-* y organización de código.
-
----
-
-# Autora
-
-Evelyn Daniela Escobar
-
-Estudiante de Desarrollo de Software en UNAD Colombia.
+**Evelyn Daniela Escobar** – Estudiante de Tecnología en Desarrollo de Software (UNAD).
