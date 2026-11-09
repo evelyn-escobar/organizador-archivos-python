@@ -13,6 +13,9 @@ Proyecto desarrollado en Python que permite organizar automáticamente archivos 
 * Organiza videos
 * Organiza archivos comprimidos
 * Crea carpetas automáticamente si no existen
+* Envía a "Otros" los archivos de tipos no reconocidos
+* No sobrescribe archivos: si el nombre ya existe, agrega (1), (2)...
+* Modo `--simular` para ver qué se movería sin mover nada
 
 ---
 
@@ -23,6 +26,8 @@ Proyecto desarrollado en Python que permite organizar automáticamente archivos 
 
   * os
   * shutil
+  * argparse
+  * unittest (pruebas)
 
 ---
 
@@ -32,6 +37,7 @@ Proyecto desarrollado en Python que permite organizar automáticamente archivos 
 organizador-archivos-python/
 │
 ├── main.py
+├── test_main.py
 ├── README.md
 │
 └── carpeta_prueba/
@@ -44,7 +50,7 @@ organizador-archivos-python/
 ## 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/daniluescobar-hue/organizador-archivos-python.git
+git clone https://github.com/evelyn-escobar/organizador-archivos-python.git
 ```
 
 ---
@@ -60,7 +66,20 @@ cd organizador-archivos-python
 ## 3. Ejecutar el programa
 
 ```bash
+# Te pide la ruta de la carpeta
 python main.py
+
+# O pásala directamente
+python main.py carpeta_prueba
+
+# Ver qué se movería, sin mover nada
+python main.py carpeta_prueba --simular
+```
+
+## 4. Ejecutar las pruebas
+
+```bash
+python -m unittest
 ```
 
 ---
